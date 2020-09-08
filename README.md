@@ -62,7 +62,7 @@ If you do not have a web server, we recommend you install a lightweight web serv
 
 - Serve: https://github.com/zeit/serve
 - Lighttpd: http://www.lighttpd.net
-- Python Server: https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server
+- Python Server: https://developer.mozilla.org/en-US/docs/Learn../common_questions/set_up_a_local_testing_server
 
 To run the examples locally on your machine, run your server from the root of the directory, since the `common` directory is a shared dependency across chapters.
 
