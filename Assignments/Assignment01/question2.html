@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Question 2 - Display Date/Time</title>
 </head>
 <body>
+<p id = "date/time"></p>
+    <script>
+        /* This function gets the current date and time.
+        I learned how to get dates/times for this function from https://www.w3schools.com/js/js_date_methods.asp
+         */
+        function currentdaytime() {
+            var t = new Date();
+            var d = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+                "Saturday"];
+            var m = ["January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"];
 
+            // Displays current date and time in the broswer window.
+            document.getElementById("date/time").innerHTML = (d[t.getDay()] + ", " + t.getDate() + " " + m[t.getMonth()] + " " +
+                t.getFullYear()+" | " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds());
+        }
+        /* Calls function currentdatetime() and updates the time every 1 second.
+        I learned how to use setInterval() from https://www.w3schools.com/jsref/met_win_setinterval.asp
+         */
+        setInterval(currentdaytime,1);
+    </script>
 </body>
 </html>

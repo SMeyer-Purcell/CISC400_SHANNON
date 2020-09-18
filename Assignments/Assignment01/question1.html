@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Question1 - Finding Area of Circle</title>
 </head>
 <body>
+    <script>
+        // Sets the variable "p" to 3.14, which is the number for Pi
+        var p = 3.14;
+        /* Asks the user for them to type in a number.
+           The number that the user has typed in will be set to the variable "r".
+           I learned about parseInt from https://www.w3schools.com/jsref/jsref_parseint.asp
+           I learned about prompt from https://www.w3schools.com/JSREF/met_win_prompt.asp
+         */
+        var r = parseInt(prompt("Enter a number."));
+        // Calculates the area of the circle by multiplying the variables p and r.
+        var a = p*r*r;
+        /* Displays the area of the circle onto the browser window for the user.
+        I learned about how to display output using JavaScript from https://www.w3schools.com/js/js_output.asp
+         */
+        document.write("Area of the circle is: " + a);
 
+    </script>
 </body>
 </html>
