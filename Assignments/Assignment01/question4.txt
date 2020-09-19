@@ -1,0 +1,7 @@
+The differences between retained-mode and immediate-mode rendering is that the retained-mode rendering's API is declarative,
+whereas the immediate-mode rendering's API is procedural.
+Retained-Mode rendering has the application build a scene from the different objects that have been drawn and then have
+the graphics library store a copy of the scene in memory.
+Whereas immediate-mode rendering does not have the graphics library store a copy of the scene in memory.
+Because retained-mode rendering stores a copy of the scene in memory, it has a higher memory usage than immediate-mode rendering;
+which doesn't allow the application to be as flexible, or offer the same level of object optimization as immediate-mode rendering.

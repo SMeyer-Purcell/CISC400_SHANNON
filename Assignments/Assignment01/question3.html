@@ -5,6 +5,53 @@
     <title>Question 3 - Matrix</title>
 </head>
 <body>
+    <script>
+        // I wasn't sure how to create a 2d array from user input, so I created two arrays under different variables just to show that the functions worked.
+        // The 2d array for var m came from the assignment problem.
+        // The 2d array for var n is the same as the array for var m, but with 1 changed number.
+        var m = [[1,0,0], [0,2,0], [0,0,3]];
+        var n = [[1,0,0], [0,2,0], [0,1,3]];
 
+        // function checkMatrix takes var m as the parameter and checks to see if the matrix for var m is diagonal or not.
+        // used this website to get a refresher on how to iterate through a matrix https://www.w3resource.com/javascript-exercises/javascript-basic-exercise-115.php
+        function checkMatrix(m)
+        {
+            // checks every number of the array until it reaches the end of the array.
+            for (var i = 0; i < m.length; i++)
+            {
+                for (var j = 0; j < m.length; j++)
+                {
+
+                    if (i !==j && m[i][j] !== 0)
+                        //if the matrix created in var m is not diagonal, it will return false.
+                        return false;
+
+                }
+            }
+            // if the matrix created in var m is diagonal, it will return true.
+            return true;
+        }
+        // The same steps for function checkMatrix(m) occurs in the function checkSecondMatrix(n).
+        // This function just takes the array that is stored in var n as the parameter.
+        function checkSecondMatrix(n)
+        {
+            for (var i = 0; i < n.length; i++)
+            {
+                for (var j = 0; j < n.length; j++)
+                {
+                    if (i !==j && n[i][j] !== 0)
+                        return false;
+                }
+            }
+            return true;
+        }
+        // The true/false results are displayed on the browser window.
+        // Since var m is a diagonal matrix, the message will display true to the question "is the matrix diagonal?".
+        document.write("Is the matrix " +m+ " diagonal? " + checkMatrix(m));
+        // I decided to add a blank line to separate the two result messages.
+        document.write("<br>");
+        // Since var n is not a diagonal matrix, the message will display false to the question "is the matrix diagonal?".
+        document.write("Is the matrix " +n+ " diagonal? " + checkSecondMatrix(n));
+    </script>
 </body>
 </html>

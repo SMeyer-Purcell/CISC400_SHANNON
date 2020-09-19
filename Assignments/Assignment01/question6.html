@@ -1,10 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<script type="text/javascript">
+    'use strict';
+    function init() {
+        const canvas = document.getElementById('webgl-canvas');
+        // Ensure we have a canvas
+        if (!canvas) {
+            console.error('Sorry! No HTML5 Canvas was found on this page');
+            return;
+        }
+        const gl = canvas.getContext('webgl2');
+        // Ensure we have a context
+        const message = gl
+            ? 'Hooray! You got a WebGL2 context'
+            : 'Sorry! WebGL is not available';
+        alert(message);
+    }
+    // Call init once the document has loaded
+    window.onload= init;
+</script>
 
-</body>
-</html>
+
+/* Answer for question 6.
+
+Line 1 tells you what type of script this code is.
+
+Line 2 is letting the program know that the JavaScript code is in Strict Mode.
+Strict Mode doesn't allow the programmer to use bad syntax by throwing up errors for any form of
+bad syntax; for example, misspelled words. Strict Mode also prevents the programmer from
+accidentally creating new global variables when they misspell a word. (https://www.w3schools.com/js/js_strict.asp).
+
+Line 3 is declaring a function named 'init'.
+
+Line 4 is creating the canvas for the web browser by retrieving information that is
+found under the id "webgl-canvas".
+
+Line 5 is just a comment to let whoever is reading this code know what the
+following if statement in line 6 is doing.
+
+Line 6 is an if statement. It's telling the program to check to see if there is a canvas created.
+
+Line 7 creates an error message that can be viewed in the console section of your web browser.
+An error message is displayed, letting the user know that the program was unable to find the
+HTML5 canvas on their web browser.
+
+Line 8 is a return statement.
+A return statement lets the program know to stop executing the if statement.
+In most cases, a return statement will return a value to the function it is inside of,
+but there is no variable next to the return statement, so no value is being returned to
+the init() function regarding the if statement.
+
+Line 9 is just a closing bracket for the if statement.
+
+Line 10 is using an HTML5 DOM method (https://www.w3schools.com/graphics/canvas_drawing.asp) to retrieve rendering context for the canvas
+before it can draw the object onto the canvas.
+(https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage#:~:text=The%20element%20has%20a,var%20canvas%20%3D%20document.).
+The information about the object that is passed as the parameter for the canvas.getContext() method
+is then saved as the variable 'gl'.
+
+Line 11 is a comment that lets whoever is reading the code that the following section of code is
+being used to make sure that there is context that can be drawn onto the canvas.
+
+Line 12 creates a message using the context information that was stored in variable 'gl'.
+
+Lines 13 and 14 are messages that will be displayed to the user on their web browser based
+on what condition the variable 'gl' meets.
+Line 13 uses the '?' condition variable to indicate that if the condition is met, the program
+will run the message 'Hooray! You got a WebGL2 context'.
+Line 14 uses the ':' condition variable to indicate that if the condition is not met,
+the program will run the message 'Sorry! WebGL is not available'.
+
+Line 15 creates an alert message that will appear on the users web browser that will
+display the message that matches the correct condition variable.
+If the condition is met, the alert will display the 'Hooray' message.
+If the condition is not met, the alert will display the 'Sorry' message.
+
+Line 16 is a closing bracket to close the init() function.
+
+Line 17 is a comment that lets wheover is reading the code know that
+'function init()' should be called once the window has loaded.
+
+Line 18 uses the HTML DOM onload event (https://www.w3schools.com/jsref/event_onload.asp),
+which will call the function 'init' once the web browser has been opened.
+
+Line 19 is the closing tag for JavaScript.
+
+*/

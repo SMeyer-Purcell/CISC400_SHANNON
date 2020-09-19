@@ -59,15 +59,16 @@
                     window.focus();
                     break;
                 }
+               // number 8 => color changes randomly without keypress
                 case 56: {
                     uColor = setInterval(uColor, 1);
 
                     function uColor() {
                         updateClearColor(Math.random(), Math.random(), Math.random(), 1.0);
                     }
-
                     break;
                 }
+                // number 9 => stops colors from automatically changing randomly
                 case 57: {
                     clearInterval(uColor);
                     break;
