@@ -107,7 +107,7 @@
             // creating paramters for a circle object
             let circle;
             // assigning the function "draw_circle()" to variable circle.
-            circle = draw_circle(150);
+            circle = draw_circle(500);
             // creating the vertices and indices for the circle.
             const vertices = circle.vertices;
             indices = circle.indices;
@@ -125,6 +125,7 @@
                 for (let i = 0; i < numV; i++) {
                     // the radiant of the circle is changed after each iteration of the for loop.
                     j += (6 * Math.PI) / numV;
+                    r = r - 0.001;
                     // pushes the new values that create the next vertex for the circle.
                     // the float value before (Math.cos/Math.sin) contributes to how big the circle will be.
                     // Math.cos determines the value of "x".
@@ -135,7 +136,7 @@
                     c.vertices.push(0);
                     // pushes new indices to the array.
                     c.indices.push(i);
-                    r = r - 0.01;
+
                 }
                 // returns the drawn circle. This will go to the variable "circle" that was defined earlier.
                 return c;
