@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DDA</title>
+</head>
+<body>
+    <script>
+        function drawDDA(x1,x2,y1,y2) {
+            dx = x2 - x1;
+            dy = y2 - y1;
+            m = dy/dx;
+
+            if (Math.abs(dx) > Math.abs(dy)) {
+                steps = Math.abs(dx);
+            else
+                steps = Math.abs(dy);
+            }
+
+            xinc = dx / steps;
+            yinc = dy / steps;
+
+
+            x = x1;
+            y = y1;
+
+            while(x <= x2) {
+                gl.drawPoint(x, y);
+                x = x + xinc;
+                y = y + yinc;
+
+            }
+        }
+    </script>
+
+</body>
+</html>
