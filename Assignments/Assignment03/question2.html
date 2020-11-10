@@ -1,0 +1,196 @@
+<html>
+<head>
+    <title>Question 2</title>
+    <link rel="shortcut icon" type="image/png" href="../../common/images/favicon.png" />
+
+    <!-- libraries -->
+    <link rel="stylesheet" href="../../common/lib/normalize.css">
+
+    <!-- modules -->
+    <script type="text/javascript" src="../../common/js/utils.js"></script>
+
+    <!-- vertex Shader -->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+    #version 300 es
+    precision mediump float;
+
+    // Supplied vertex position attribute
+    in vec3 aVertexPosition;
+
+    void main(void) {
+      // Set the position in clipspace coordinates
+      gl_Position = vec4(aVertexPosition, 1.0);
+    }
+  </script>
+
+    <!-- fragment Shader -->
+    <script id="fragment-shader" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+
+    // Color that is the result of this shader
+    out vec4 fragColor;
+
+    void main(void) {
+      // Set the result as red
+      fragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+  </script>
+
+    <script type="text/javascript">
+        'use strict';
+
+        // Global variables that are set and used
+        // across the application
+        let gl,
+            program,
+            squareVertexBuffer,
+            squareIndexBuffer,
+            indices;
+
+        // Given an id, extract the content's of a shader script
+        // from the DOM and return the compiled shader
+        function getShader(id) {
+            const script = document.getElementById(id);
+            const shaderString = script.text.trim();
+
+            // Assign shader depending on the type of shader
+            let shader;
+            if (script.type === 'x-shader/x-vertex') {
+                shader = gl.createShader(gl.VERTEX_SHADER);
+            }
+            else if (script.type === 'x-shader/x-fragment') {
+                shader = gl.createShader(gl.FRAGMENT_SHADER);
+            }
+            else {
+                return null;
+            }
+
+            // Compile the shader using the supplied shader code
+            gl.shaderSource(shader, shaderString);
+            gl.compileShader(shader);
+
+            // Ensure the shader is valid
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error(gl.getShaderInfoLog(shader));
+                return null;
+            }
+
+            return shader;
+        }
+
+        // Create a program with the appropriate vertex and fragment shaders
+        function initProgram() {
+            const vertexShader = getShader('vertex-shader');
+            const fragmentShader = getShader('fragment-shader');
+
+            // Create a program
+            program = gl.createProgram();
+            // Attach the shaders to this program
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error('Could not initialize shaders');
+            }
+
+            // Use this program instance
+            gl.useProgram(program);
+            // We attach the location of these shader values to the program instance
+            // for easy access later in the code
+            program.aVertexPosition = gl.getAttribLocation(program, 'aVertexPosition');
+        }
+
+        // I couldn't figure out how to get the circle move, so I got the circle code from https://developer.tizen.org/dev-guide/2.4/org.tizen.tutorials/html/web/w3c/supplement/webgl_tutorial_w.htm#draw
+
+        function initBuffers() {
+            // Configuring the circle's parameters.
+            let circle;
+                circle = draw();
+                var r = 0.1; // Radius of the circle
+                var n = 15; // Number of vertices that create the circle
+                var x = 0; // Position of x
+                var y = 0; // Position of y
+
+                // Position of the vertices in the center of the circle.
+                var innerVertices = [x, y];
+                var outsideVertices = [];
+                var prevVertices = [];
+                var vertices = [];
+                var angle = 0.0;
+
+
+
+        // We call draw to render to our canvas
+        function draw() {
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // canvas
+
+            y = Math.sin(angle) * 0.9;
+            x = Math.sin(angle) * 0.9;
+            innerVertices = [x, y];
+            outsideVertices = [];
+            prevVertices = [];
+            vertices = [];
+
+            for (var i = 0; i < n; i++) {
+                outsideVertices.push(x + r * Math.cos(i / n * 2 * Math.PI - Math.PI / 2));
+                outsideVertices.push(y + r * Math.sin(i / n * 2 * Math.PI - Math.PI / 2));
+            }
+            // Combine all of the arrays that held the x and y positions of each vertices for the circle together using the .concat() method.
+            // Learned how to use the concat method from W3Schools website: https://www.w3schools.com/jsref/jsref_concat_array.asp
+            prevVertices = [outsideVertices[0], outsideVertices[1]];
+            outsideVertices = outsideVertices.concat(prevVertices);
+            vertices = vertices.concat(innerVertices);
+            vertices = vertices.concat(outsideVertices);
+
+            angle += 0.01;
+
+
+            gl.triangleVerticesBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, gl.triangleVerticesBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+            gl.vertexPositionAttribute = gl.getAttribLocation(program, "aVertexPosition");
+            gl.enableVertexAttribArray(gl.vertexPositionAttribute);
+            gl.vertexAttribPointer(gl.vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
+            gl.drawArrays(gl.TRIANGLE_FAN, 0, n + 2);
+        }
+
+            window.setInterval(function () {
+                draw(); }, 10);
+        }
+
+        // Entry point to our application
+        function init() {
+            // Retrieve the canvas
+            const canvas = utils.getCanvas('webgl-canvas');
+
+            // Set the canvas to the size of the screen
+            canvas.width = 500;
+            canvas.height = 500;
+
+            // Retrieve a WebGL context
+            gl = utils.getGLContext(canvas);
+            // Set the clear color to be black
+            gl.clearColor(0, 0, 0, 1);
+
+            // Call the functions in an appropriate order
+            initProgram();
+            initBuffers();
+            draw();
+        }
+
+        // Call init once the webpage has loaded
+        window.onload = init;
+    </script>
+</head>
+
+<body>
+
+<canvas id="webgl-canvas">
+    Your browser does not support the HTML5 canvas element.
+</canvas>
+
+</body>
+</html>
